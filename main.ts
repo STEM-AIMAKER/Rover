@@ -1,4 +1,4 @@
-//% weight=10 color=#1E90FF icon="\uf136"
+// % weight=10 color=#1E90FF icon="\uf136"
 namespace hscobot {
     let serialInited = 0;
     let serialReadLine = "";
@@ -176,8 +176,8 @@ namespace hscobot {
     }
 
     //% blockId=setRGBColor block="set car left RGB light=%leftRGB right RGB=%rightRGB"
-    //% leftRGB.shadow="colorWheelPicker"
-    //% rightRGB.shadow="colorWheelPicker"
+    //% leftRGB.shadow="colorNumberPicker"
+    //% rightRGB.shadow="colorNumberPicker"
     export function setRGBColor(leftRGB: number, rightRGB: number) : void {
 
     }
