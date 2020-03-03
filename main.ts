@@ -1,5 +1,5 @@
-// % weight=10 color=#1E90FF icon="\uf136"
-namespace hscobot {
+//% weight=10 color=#1E90FF icon="\uf136"
+namespace HSCoBot {
     let serialInited = 0;
     let serialReadLine = "";
     
@@ -58,7 +58,7 @@ namespace hscobot {
         return str;
     }
 
-   
+    //% weight=90
     //% blockId=runMotor block="Manual mode run motor at left speed=%LeftSpeed direction=%LeftDirection right speed=%RightSpeed direction=%RightDirection"
     //% LeftSpeed.min=0 LeftSpeed.max=360
     //% LeftDirection.fieldEditor="gridpicker" LeftDirection.fieldOptions.columns=1
@@ -78,11 +78,13 @@ namespace hscobot {
         serial.writeLine(cmd);
     }
 
+    //% weight=90
     //% blockId=stopCar block="Stop car in manual mode"
     export function stopCar(): void {
         runMotor(0, Directions.Positive, 0, Directions.Positive);
     }
 
+    //% weight=90
     //% blockId=pauseAI block="Pause AI Model"
     export function pauseAI(): void {
         initSerial();
@@ -90,6 +92,7 @@ namespace hscobot {
         serial.writeLine(cmd2);
     }
 
+    //% weight=90
     //% blockId=resumeAI block="Resume AI Model"
     export function resumeAI(): void {
         initSerial();
@@ -97,6 +100,7 @@ namespace hscobot {
         serial.writeLine(cmd3);
     }
 
+    //% weight=90
     //% blockId=rebootAIModule block="Reboot AI module"
     export function rebootAIModule():void {
         let cmd4 = "EXRS++++++"
@@ -145,41 +149,48 @@ namespace hscobot {
         basic.pause(100);
     }
 
+    //% weight=90
     //% blockId=turnOnLED block="Turn on LED lights"
     export function turnOnLED() : void {
         initSerial();
         serial.writeLine("CHON");
     }
     
+    //% weight=90
     //% blockId=turnOffLED block="Turn off LED lights"
     export function turnOffLED(): void {
         initSerial();
         serial.writeLine("CHOFF");
     }
 
+    //% weight=90
     //% blockId=turnOnBuzzer block="Turn on buzzer"
     export function turnOnBuzzer() : void {
         initSerial();
         serial.writeLine("CBON");
     }
 
+    //% weight=90
     //% blockId=turnOffBuzzer block="Turn off buzzer"
     export function turnOffBuzzer(): void {
         initSerial();
         serial.writeLine("CBOFF");
     }
 
+    //% weight=90
     //% blockId=queryBattery block="Query car battery"
     export function queryBattery() : void {
         initSerial();
         serial.writeLine("CTINFO");
     }
 
+    //% weight=90
     //% blockId=setRGBColor block="set car left RGB light=%leftRGB right RGB=%rightRGB"
     //% leftRGB.shadow="colorNumberPicker"
     //% rightRGB.shadow="colorNumberPicker"
     export function setRGBColor(leftRGB: number, rightRGB: number) : void {
-
+        console.log("leftRGB="+leftRGB+" rightRGB="+rightRGB)
+        
     }
 
     serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
@@ -187,7 +198,7 @@ namespace hscobot {
         console.log("serial read:" + serialReadLine)
     })
 
-    //% weight=120
+    //% weight=80
     //% blockId=connectWIFI block="connect to WIFI, ssid=%ssid password=%pin"
     export function connectWIFI(ssid: string, password: string) : void {
         let cmdConnect = "AT+CWJAP_DEF=\"" + ssid + "\",\"" + password + "\""
@@ -196,13 +207,13 @@ namespace hscobot {
         basic.pause(5000)
     }
 
-    //% weight=120
+    //% weight=80
     //% blockId=setWifiWaitforConnect block="Set WIFI enter wait for connect mode"
     export function setWifiWaitforConnect() : void {
 
     }
 
-    //% weight=120
+    //% weight=80
     //% blockId=exitWifiWaitforConnect block="Set WIFI exit wait for connect mode"
     export function exitWifiWaitforConnect() : void {
 
