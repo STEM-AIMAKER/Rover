@@ -74,8 +74,8 @@ namespace HSCoBot {
         if (RightDirection == Directions.Negative)
             RD = "0"
 
-        cmd = "CM" + LD + RD + addParameter(LeftSpeed) + addParameter(RightSpeed);
-        serial.writeLine(cmd);
+        cmd = "CM" + LD + RD + addParameter(LeftSpeed) + addParameter(RightSpeed)+"#";
+        serial.writeString(cmd);
     }
 
     //% weight=90
@@ -88,24 +88,24 @@ namespace HSCoBot {
     //% blockId=pauseAI block="Pause AI Model"
     export function pauseAI(): void {
         initSerial();
-        let cmd2 = "EXPS+++++0"; // Pause
-        serial.writeLine(cmd2);
+        let cmd2 = "EXPS+++++0#"; // Pause
+        serial.writeString(cmd2);
     }
 
     //% weight=90
     //% blockId=resumeAI block="Resume AI Model"
     export function resumeAI(): void {
         initSerial();
-        let cmd3 = "EXPS+++++1"; 
-        serial.writeLine(cmd3);
+        let cmd3 = "EXPS+++++1#"; 
+        serial.writeString(cmd3);
     }
 
     //% weight=90
     //% blockId=rebootAIModule block="Reboot AI module"
     export function rebootAIModule():void {
-        let cmd4 = "EXRS++++++"
+        let cmd4 = "EXRS++++++#"
         initSerial();
-        serial.writeLine(cmd4);
+        serial.writeString(cmd4);
         basic.pause(3000)
     }
 
@@ -117,24 +117,24 @@ namespace HSCoBot {
         initSerial();
         switch (mode) {
             case CarMode.Manual:
-                cmd5 = "EXPS+++++0"; // Pause
+                cmd5 = "EXPS+++++0#"; // Pause
                 break;
             case CarMode.AIDrive:
-                cmd5 = "EXMO+++++0"
+                cmd5 = "EXMO+++++0#"
                 break;
             case CarMode.BallTracking:
-                cmd5 = "EXMO+++++1"
+                cmd5 = "EXMO+++++1#"
                 break;
             case CarMode.PersonDetect:
-                cmd5 = "EXMO+++++2"
+                cmd5 = "EXMO+++++2#"
                 break;
             case CarMode.FaceDetect:
-                cmd5 = "EXMO+++++3"
+                cmd5 = "EXMO+++++3#"
                 break;
         }
 
         if (cmd5.length > 0) {
-            serial.writeLine(cmd5);
+            serial.writeString(cmd5);
             basic.pause(100);
         }
     }
@@ -143,9 +143,9 @@ namespace HSCoBot {
     //% blockId=changeAIColor block="Change AI color to |%color"
     //% color.fieldEditor="gridpicker" color.fieldOptions.columns=2
     export function changeAIColor(color: ColorFilter): void {
-        let cmd6 = "EXCO+++++" + (color).toString();
+        let cmd6 = "EXCO+++++" + (color).toString()+"#";
         initSerial();       
-        serial.writeLine(cmd6);
+        serial.writeString(cmd6);
         basic.pause(100);
     }
 
@@ -153,35 +153,35 @@ namespace HSCoBot {
     //% blockId=turnOnLED block="Turn on LED lights"
     export function turnOnLED() : void {
         initSerial();
-        serial.writeLine("CHON");
+        serial.writeString("CHON#");
     }
     
     //% weight=90
     //% blockId=turnOffLED block="Turn off LED lights"
     export function turnOffLED(): void {
         initSerial();
-        serial.writeLine("CHOFF");
+        serial.writeString("CHOFF#");
     }
 
     //% weight=90
     //% blockId=turnOnBuzzer block="Turn on buzzer"
     export function turnOnBuzzer() : void {
         initSerial();
-        serial.writeLine("CBON");
+        serial.writeString("CBON#");
     }
 
     //% weight=90
     //% blockId=turnOffBuzzer block="Turn off buzzer"
     export function turnOffBuzzer(): void {
         initSerial();
-        serial.writeLine("CBOFF");
+        serial.writeString("CBOFF#");
     }
 
     //% weight=90
     //% blockId=queryBattery block="Query car battery"
     export function queryBattery() : void {
         initSerial();
-        serial.writeLine("CTINFO");
+        serial.writeString("CTINFO#");
     }
 
     //% weight=90
@@ -192,11 +192,6 @@ namespace HSCoBot {
         console.log("leftRGB="+leftRGB+" rightRGB="+rightRGB)
         
     }
-
-    serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
-        serialReadLine = serial.readLine();
-        console.log("serial read:" + serialReadLine)
-    })
 
     //% weight=80
     //% blockId=connectWIFI block="connect to WIFI, ssid=%ssid password=%pin"
@@ -218,4 +213,10 @@ namespace HSCoBot {
     export function exitWifiWaitforConnect() : void {
 
     }
+
+
+    serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
+        serialReadLine = serial.readLine();
+        basic.showString(serialReadLine)
+    })
 }
