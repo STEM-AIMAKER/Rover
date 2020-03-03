@@ -65,7 +65,6 @@ namespace hscobot {
     //% RightSpeed.min=0 RightSpeed.max=360
     //% RightDirection.fieldEditor="gridpicker" RightDirection.fieldOptions.columns=1
     export function runMotor( LeftSpeed: number, LeftDirection: Directions, RightSpeed : number, RightDirection : Directions): void {
-           //CM +方向A(1Byte)+方向B(1Byte)+占空比A(3BYTE)+占空比B(3Byte)
         initSerial();
         let cmd = "";
         let LD = "1"
@@ -146,14 +145,66 @@ namespace hscobot {
         basic.pause(100);
     }
 
+    //% blockId=turnOnLED block="Turn on LED lights"
+    export function turnOnLED() : void {
+        initSerial();
+        serial.writeLine("CHON");
+    }
+    
+    //% blockId=turnOffLED block="Turn off LED lights"
+    export function turnOffLED(): void {
+        initSerial();
+        serial.writeLine("CHOFF");
+    }
+
+    //% blockId=turnOnBuzzer block="Turn on buzzer"
+    export function turnOnBuzzer() : void {
+        initSerial();
+        serial.writeLine("CBON");
+    }
+
+    //% blockId=turnOffBuzzer block="Turn off buzzer"
+    export function turnOffBuzzer(): void {
+        initSerial();
+        serial.writeLine("CBOFF");
+    }
+
+    //% blockId=queryBattery block="Query car battery"
+    export function queryBattery() : void {
+        initSerial();
+        serial.writeLine("CTINFO");
+    }
+
+    //% blockId=setRGBColor block="set car left RGB light=%leftRGB right RGB=%rightRGB"
+    //% leftRGB.shadow="colorWheelPicker"
+    //% rightRGB.shadow="colorWheelPicker"
+    export function setRGBColor(leftRGB: number, rightRGB: number) : void {
+
+    }
+
     serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
         serialReadLine = serial.readLine();
         console.log("serial read:" + serialReadLine)
     })
 
-    //% weight=90
-     //% blockId=connectWIFI block="connect to WIFI, ssid=%ssid pin=%pin"
-    export function connectWIFI(ssid:string , pin: string) : void {
+    //% weight=120
+    //% blockId=connectWIFI block="connect to WIFI, ssid=%ssid password=%pin"
+    export function connectWIFI(ssid: string, password: string) : void {
+        let cmdConnect = "AT+CWJAP_DEF=\"" + ssid + "\",\"" + password + "\""
+        serial.writeString(cmdConnect)
+        serial.readString()
+        basic.pause(5000)
+    }
+
+    //% weight=120
+    //% blockId=setWifiWaitforConnect block="Set WIFI enter wait for connect mode"
+    export function setWifiWaitforConnect() : void {
+
+    }
+
+    //% weight=120
+    //% blockId=exitWifiWaitforConnect block="Set WIFI exit wait for connect mode"
+    export function exitWifiWaitforConnect() : void {
 
     }
 }
