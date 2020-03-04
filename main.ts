@@ -64,6 +64,7 @@ namespace HSCoBot {
     //% LeftDirection.fieldEditor="gridpicker" LeftDirection.fieldOptions.columns=1
     //% RightSpeed.min=0 RightSpeed.max=360
     //% RightDirection.fieldEditor="gridpicker" RightDirection.fieldOptions.columns=1
+    //% inlineInputMode=inline
     export function runMotor( LeftSpeed: number, LeftDirection: Directions, RightSpeed : number, RightDirection : Directions): void {
         initSerial();
         let cmd = "";
@@ -192,6 +193,7 @@ namespace HSCoBot {
     //% rightRed.min=0 rightRed.max=255
     //% rightGreen.min=0 rightGreen.max=255
     //% rightBlue.min=0 rightBlue.max=255
+    //% inlineInputMode=inline
     export function setRGBColor(leftRed: number, leftGreen:number, leftBlue:number,
                                 rightRed: number, rightGreen:number, rightBlue:number) : void {
         let rgbcmd = "CR" + addParameter(leftRed) + addParameter(leftGreen) + addParameter(leftBlue) + 
