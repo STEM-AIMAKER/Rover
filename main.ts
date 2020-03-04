@@ -6,7 +6,7 @@ namespace HSCoBot {
     export enum CarMode {
         //% blockId="Manual" block="Manual"
         Manual = 0,
-        //% blockId="AIDrive" block="AI"
+        //% blockId="AIDrive" block="AI Drive"
         AIDrive = 1,
         //% blockId="BallTracking" block="Ball Tracking"
         BallTracking=2,
