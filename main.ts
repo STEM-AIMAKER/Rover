@@ -213,13 +213,13 @@ namespace HSCoBot {
     //% weight=80
     //% blockId=setWifiWaitforConnect block="Set WIFI enter wait for connect mode"
     export function setWifiWaitforConnect() : void {
-
+        serial.writeString("TCON")
     }
 
     //% weight=80
     //% blockId=exitWifiWaitforConnect block="Set WIFI exit wait for connect mode"
     export function exitWifiWaitforConnect() : void {
-
+        serial.writeString("TCOFF")
     }
 
 
