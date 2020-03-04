@@ -74,7 +74,7 @@ namespace HSCoBot {
         if (RightDirection == Directions.Negative)
             RD = "0"
 
-        cmd = "CM" + LD + RD + addParameter(LeftSpeed) + addParameter(RightSpeed)+"#";
+        cmd = "CM" + LD + RD + addParameter(LeftSpeed) + addParameter(RightSpeed)+"\n";
         serial.writeString(cmd);
     }
 
@@ -88,7 +88,7 @@ namespace HSCoBot {
     //% blockId=pauseAI block="Pause AI Model"
     export function pauseAI(): void {
         initSerial();
-        let cmd2 = "EXPS+++++0#"; // Pause
+        let cmd2 = "EXPS+++++0\n"; // Pause
         serial.writeString(cmd2);
     }
 
@@ -96,14 +96,14 @@ namespace HSCoBot {
     //% blockId=resumeAI block="Resume AI Model"
     export function resumeAI(): void {
         initSerial();
-        let cmd3 = "EXPS+++++1#"; 
+        let cmd3 = "EXPS+++++1\n"; 
         serial.writeString(cmd3);
     }
 
     //% weight=90
     //% blockId=rebootAIModule block="Reboot AI module"
     export function rebootAIModule():void {
-        let cmd4 = "EXRS++++++#"
+        let cmd4 = "EXRS++++++\n"
         initSerial();
         serial.writeString(cmd4);
         basic.pause(3000)
@@ -117,19 +117,19 @@ namespace HSCoBot {
         initSerial();
         switch (mode) {
             case CarMode.Manual:
-                cmd5 = "EXPS+++++0#"; // Pause
+                cmd5 = "EXPS+++++0\n"; // Pause
                 break;
             case CarMode.AIDrive:
-                cmd5 = "EXMO+++++0#"
+                cmd5 = "EXMO+++++0\n"
                 break;
             case CarMode.BallTracking:
-                cmd5 = "EXMO+++++1#"
+                cmd5 = "EXMO+++++1\n"
                 break;
             case CarMode.PersonDetect:
-                cmd5 = "EXMO+++++2#"
+                cmd5 = "EXMO+++++2\n"
                 break;
             case CarMode.FaceDetect:
-                cmd5 = "EXMO+++++3#"
+                cmd5 = "EXMO+++++3\n"
                 break;
         }
 
@@ -143,7 +143,7 @@ namespace HSCoBot {
     //% blockId=changeAIColor block="Change AI color to |%color"
     //% color.fieldEditor="gridpicker" color.fieldOptions.columns=2
     export function changeAIColor(color: ColorFilter): void {
-        let cmd6 = "EXCO+++++" + (color).toString()+"#";
+        let cmd6 = "EXCO+++++" + (color).toString() +"\n";
         initSerial();       
         serial.writeString(cmd6);
         basic.pause(100);
@@ -153,44 +153,50 @@ namespace HSCoBot {
     //% blockId=turnOnLED block="Turn on LED lights"
     export function turnOnLED() : void {
         initSerial();
-        serial.writeString("CHON#");
+        serial.writeString("CHON\n");
     }
     
     //% weight=90
     //% blockId=turnOffLED block="Turn off LED lights"
     export function turnOffLED(): void {
         initSerial();
-        serial.writeString("CHOFF#");
+        serial.writeString("CHOFF\n");
     }
 
     //% weight=90
     //% blockId=turnOnBuzzer block="Turn on buzzer"
     export function turnOnBuzzer() : void {
         initSerial();
-        serial.writeString("CBON#");
+        serial.writeString("CBON\n");
     }
 
     //% weight=90
     //% blockId=turnOffBuzzer block="Turn off buzzer"
     export function turnOffBuzzer(): void {
         initSerial();
-        serial.writeString("CBOFF#");
+        serial.writeString("CBOFF\n");
     }
 
     //% weight=90
     //% blockId=queryBattery block="Query car battery"
     export function queryBattery() : void {
         initSerial();
-        serial.writeString("CTINFO#");
+        serial.writeString("CTINFO\n");
     }
 
     //% weight=90
-    //% blockId=setRGBColor block="set car left RGB light=%leftRGB right RGB=%rightRGB"
-    //% leftRGB.shadow="colorNumberPicker"
-    //% rightRGB.shadow="colorNumberPicker"
-    export function setRGBColor(leftRGB: number, rightRGB: number) : void {
-        console.log("leftRGB="+leftRGB+" rightRGB="+rightRGB)
-        
+    //% blockId=setRGBColor block="set RGB light left red=%leftRed green=%leftGreen blue=%leftBlue right red=%rightRed green=%rightGreen blue=%rightBlue"
+    //% leftRed.min=0 leftRed.max=255
+    //% leftGreen.min=0 leftGreen.max=255
+    //% leftBlue.min=0 leftBlue.max=255
+    //% rightRed.min=0 rightRed.max=255
+    //% rightGreen.min=0 rightGreen.max=255
+    //% rightBlue.min=0 rightBlue.max=255
+    export function setRGBColor(leftRed: number, leftGreen:number, leftBlue:number,
+                                rightRed: number, rightGreen:number, rightBlue:number) : void {
+        let rgbcmd = "CR" + addParameter(leftRed) + addParameter(leftRed) + addParameter(leftRed) + 
+            addParameter(rightRed) + addParameter(rightGreen) + addParameter(rightBlue)+"\n";
+        serial.writeString(rgbcmd)
     }
 
     //% weight=80
@@ -215,7 +221,7 @@ namespace HSCoBot {
     }
 
 
-    serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
+    serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
         serialReadLine = serial.readLine();
         basic.showString(serialReadLine)
     })
