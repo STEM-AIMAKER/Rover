@@ -194,7 +194,7 @@ namespace HSCoBot {
     //% rightBlue.min=0 rightBlue.max=255
     export function setRGBColor(leftRed: number, leftGreen:number, leftBlue:number,
                                 rightRed: number, rightGreen:number, rightBlue:number) : void {
-        let rgbcmd = "CR" + addParameter(leftRed) + addParameter(leftRed) + addParameter(leftRed) + 
+        let rgbcmd = "CR" + addParameter(leftRed) + addParameter(leftGreen) + addParameter(leftBlue) + 
             addParameter(rightRed) + addParameter(rightGreen) + addParameter(rightBlue)+"\n";
         serial.writeString(rgbcmd)
     }
