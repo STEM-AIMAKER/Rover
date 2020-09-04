@@ -184,6 +184,7 @@ namespace HSCoBot {
         initSerial();
         serial.writeString("CTINFO\n");
     }
+    
 
     //% weight=90
     //% blockId=setRGBColor block="set RGB light left red=%leftRed green=%leftGreen blue=%leftBlue right red=%rightRed green=%rightGreen blue=%rightBlue"
