@@ -151,6 +151,43 @@ namespace HSCoBot {
     }
 
     //% weight=90
+    //% blockId=queryLineSensor block="Query line sensor status"
+    export function queryLineSensor() : void {
+        initSerial();
+        serial.writeString("CLINFO\n");
+        basic.pause(500);
+    }
+    
+    //% weight=90
+    //% blockId=querySonarDistance block="Query sonar distance(CM)"
+    export function querySonarDistance() : void {
+        initSerial();
+        serial.writeString("CUINFO\n");
+        basic.pause(500);
+    }
+    
+     //% weight=90
+    //% blockId=TurnOnAutomaticObstacleAvoidance block="Turn on automatic obstacle avoidance"
+    export function TurnOnAutomaticObstacleAvoidance() : void {
+        initSerial();
+        serial.writeString("CTESTON\n");
+    }
+    
+     //% weight=90
+    //% blockId=TurnOffAutomaticObstacleAvoidance block="Turn off automatic obstacle avoidance"
+    export function TurnOffAutomaticObstacleAvoidance() : void {
+        initSerial();
+        serial.writeString("CTESTOFF\n");
+    }
+    
+     //% weight=90
+    //% blockId=queryVoltage block="Query voltage(mv)"
+    export function queryVoltage() : void {
+        initSerial();
+        serial.writeString("CVINFO\n");
+        basic.pause(500);
+    }
+    //% weight=90
     //% blockId=turnOnLED block="Turn on LED lights"
     export function turnOnLED() : void {
         initSerial();
