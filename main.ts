@@ -260,9 +260,75 @@ namespace HSCoBot {
         serial.writeString("TCOFF")
     }
 
+    let ctBattery = ""
+    let cvValue = ""
+    let cuValue = ""
+    let line1Value = 0
+    let line2Value = 0
+    let line3Value = 0
+    let line4Value = 0
+    
+    //% weight=80
+    //% blockId=battery block="Get battery value"
+    export function battery() : string {
+        return ctBattery
+    }
+    
+    //% weight=80
+    //% blockId=voltage block="Get voltage value"
+    export function voltage(): string {
+        return cvValue
+    }
+    
+    //% weight=80
+    //% blockId=sonarDistance block="Get sonar distance"
+    export function sonarDistance(): string {
+        return cuValue
+    }
+    
+    //% weight=80
+    //% blockId=lineSensor1 block="Get line sensor 1 value"
+    export function lineSensor1(): number {
+        return line1Value
+    }
 
+    //% weight=80
+    //% blockId=lineSensor2 block="Get line sensor 2 value"
+    export function lineSensor2(): number {
+        return line2Value
+    }
+    
+    //% weight=80
+    //% blockId=lineSensor2 block="Get line sensor 3 value"
+    export function lineSensor3(): number {
+        return line3Value
+    }
+    
+    //% weight=80
+    //% blockId=lineSensor4 block="Get line sensor 4 value"
+    export function lineSensor4(): number {
+        return line4Value
+    }    
+    
     serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
         serialReadLine = serial.readLine();
         basic.showString(serialReadLine)
+        
+        if ( serialReadLine.length > 2 ) {
+            let cmd = serialReadLine.substr(0,2)
+            if( cmd === "CL" ) {
+                line1Value = serialReadLine.substr(2,1)
+                line2Value = serialReadLine.substr(3,1)
+                line3Value = serialReadLine.substr(4,1)
+                line4Value = serialReadLine.substr(5,1)
+            }
+            else if( cmd === "CV" ) {
+                cvValue = serialReadLine.substr(2)
+            } else if( cmd === "CU" ) {
+                cuValue = serialReadLine.substr(2)
+            } else if( cmd === "CT" ) {
+                ctBattery = serialReadLine.substr(2)
+            }
+        }
     })
 }
