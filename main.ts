@@ -263,10 +263,10 @@ namespace HSCoBot {
     let ctBattery = ""
     let cvValue = ""
     let cuValue = ""
-    let line1Value = 0
-    let line2Value = 0
-    let line3Value = 0
-    let line4Value = 0
+    let line1Value = ""
+    let line2Value = ""
+    let line3Value = ""
+    let line4Value = ""
     
     //% weight=80
     //% blockId=battery block="Get battery value"
@@ -288,25 +288,25 @@ namespace HSCoBot {
     
     //% weight=80
     //% blockId=lineSensor1 block="Get line sensor 1 value"
-    export function lineSensor1(): number {
+    export function lineSensor1(): string {
         return line1Value
     }
 
     //% weight=80
     //% blockId=lineSensor2 block="Get line sensor 2 value"
-    export function lineSensor2(): number {
+    export function lineSensor2(): string {
         return line2Value
     }
     
     //% weight=80
     //% blockId=lineSensor2 block="Get line sensor 3 value"
-    export function lineSensor3(): number {
+    export function lineSensor3(): string {
         return line3Value
     }
     
     //% weight=80
     //% blockId=lineSensor4 block="Get line sensor 4 value"
-    export function lineSensor4(): number {
+    export function lineSensor4(): string {
         return line4Value
     }    
     
