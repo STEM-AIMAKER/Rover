@@ -299,7 +299,7 @@ namespace HSCoBot {
     }
     
     //% weight=80
-    //% blockId=lineSensor2 block="Get line sensor 3 value"
+    //% blockId=lineSensor3 block="Get line sensor 3 value"
     export function lineSensor3(): string {
         return line3Value
     }
