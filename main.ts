@@ -312,7 +312,7 @@ namespace HSCoBot {
     
     serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
         serialReadLine = serial.readLine();
-        basic.showString(serialReadLine)
+        //basic.showString(serialReadLine)
         
         if ( serialReadLine.length > 2 ) {
             let cmd = serialReadLine.substr(0,2)
