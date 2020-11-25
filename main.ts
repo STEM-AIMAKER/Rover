@@ -155,7 +155,7 @@ namespace HSCoBot {
     export function queryLineSensor() : void {
         initSerial();
         serial.writeString("CLINFO\n");
-        basic.pause(500);
+        basic.pause(20);
     }
     
     //% weight=90
@@ -163,7 +163,7 @@ namespace HSCoBot {
     export function querySonarDistance() : void {
         initSerial();
         serial.writeString("CUINFO\n");
-        basic.pause(500);
+        basic.pause(100);
     }
     
      //% weight=90
@@ -185,7 +185,7 @@ namespace HSCoBot {
     export function queryVoltage() : void {
         initSerial();
         serial.writeString("CVINFO\n");
-        basic.pause(500);
+        basic.pause(100);
     }
     //% weight=90
     //% blockId=turnOnLED block="Turn on LED lights"
