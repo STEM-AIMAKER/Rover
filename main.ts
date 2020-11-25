@@ -260,53 +260,53 @@ namespace HSCoBot {
         serial.writeString("TCOFF")
     }
 
-    let ctBattery = ""
-    let cvValue = ""
-    let cuValue = ""
-    let line1Value = ""
-    let line2Value = ""
-    let line3Value = ""
-    let line4Value = ""
+    let ctBattery = 0
+    let cvValue = 0
+    let cuValue = 0
+    let line1Value = 0
+    let line2Value = 0
+    let line3Value = 0
+    let line4Value = 0
     
     //% weight=80
     //% blockId=battery block="Get battery value"
-    export function battery() : string {
+    export function battery() : number {
         return ctBattery
     }
     
     //% weight=80
     //% blockId=voltage block="Get voltage value"
-    export function voltage(): string {
+    export function voltage(): number {
         return cvValue
     }
     
     //% weight=80
     //% blockId=sonarDistance block="Get sonar distance"
-    export function sonarDistance(): string {
+    export function sonarDistance(): number {
         return cuValue
     }
     
     //% weight=80
     //% blockId=lineSensor1 block="Get line sensor 1 value"
-    export function lineSensor1(): string {
+    export function lineSensor1(): number {
         return line1Value
     }
 
     //% weight=80
     //% blockId=lineSensor2 block="Get line sensor 2 value"
-    export function lineSensor2(): string {
+    export function lineSensor2(): number {
         return line2Value
     }
     
     //% weight=80
     //% blockId=lineSensor3 block="Get line sensor 3 value"
-    export function lineSensor3(): string {
+    export function lineSensor3(): number {
         return line3Value
     }
     
     //% weight=80
     //% blockId=lineSensor4 block="Get line sensor 4 value"
-    export function lineSensor4(): string {
+    export function lineSensor4(): number {
         return line4Value
     }    
     
@@ -317,17 +317,17 @@ namespace HSCoBot {
         if ( serialReadLine.length > 2 ) {
             let cmd = serialReadLine.substr(0,2)
             if( cmd === "CL" ) {
-                line1Value = serialReadLine.substr(2,1)
-                line2Value = serialReadLine.substr(3,1)
-                line3Value = serialReadLine.substr(4,1)
-                line4Value = serialReadLine.substr(5,1)
+                line1Value = parseInt(serialReadLine.substr(2,1))
+                line2Value = parseInt(serialReadLine.substr(3,1))
+                line3Value = parseInt(serialReadLine.substr(4,1))
+                line4Value = parseInt(serialReadLine.substr(5,1))
             }
             else if( cmd === "CV" ) {
-                cvValue = serialReadLine.substr(2)
+                cvValue = parseInt(serialReadLine.substr(2))
             } else if( cmd === "CU" ) {
-                cuValue = serialReadLine.substr(2)
+                cuValue = parseInt(serialReadLine.substr(2))
             } else if( cmd === "CT" ) {
-                ctBattery = serialReadLine.substr(2)
+                ctBattery = parseInt(serialReadLine.substr(2))
             }
         }
     })
