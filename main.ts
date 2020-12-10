@@ -40,7 +40,7 @@ namespace HSCoBot {
             serial.redirect(
                 SerialPin.P16,
                 SerialPin.P8,
-                BaudRate.BaudRate115200
+                BaudRate.BaudRate9600 //BaudRate.BaudRate115200
             );
             serialInited = 1;
         }
