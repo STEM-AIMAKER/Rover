@@ -1,5 +1,5 @@
 //% weight=10 color=#1E90FF icon="\uf136"
-namespace HSCoBot {
+namespace Rover {
     let serialInited = 0;
     let serialReadLine = "";
     
