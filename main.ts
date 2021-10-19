@@ -170,16 +170,40 @@ namespace Rover {
     //% blockId=TurnOnAutomaticObstacleAvoidance block="Turn on automatic obstacle avoidance"
     export function TurnOnAutomaticObstacleAvoidance() : void {
         initSerial();
-        serial.writeString("CTESTON\n");
+        serial.writeString("CTCKON=1\n");
     }
     
      //% weight=90
     //% blockId=TurnOffAutomaticObstacleAvoidance block="Turn off automatic obstacle avoidance"
     export function TurnOffAutomaticObstacleAvoidance() : void {
         initSerial();
-        serial.writeString("CTESTOFF\n");
+        serial.writeString("CTCKON=0\n");
     }
-    
+    /*
+    //CTCKUD=xxxx  //超声障碍物停车距离 单位CM 默认20
+    //CTCKIR=xxxx  //linesensor阀值 单位mV 默认1600
+    //CTCKS1=xxxx  //Tracking normal speed //直行速度 默认200
+    //CTCKS2=xxxx  //Tracking slow speed //左/右转 慢速轮速度 默认100
+    //CTCKS3=xxxx  //Tracking fast speed //左/右转 快速轮速度 默认250  
+    //CGYRO=0     //返回六轴xyz加速度
+    //mpu6050buf[0]=+/-
+    //mpu6050buf[1] = x_data/10000+0x30;mpu6050buf[2] = x_data/1000%10+0x30;
+    //mpu6050buf[3] = x_data/100%10+0x30;
+      mpu6050buf[4] = x_data/10%10+0x30;
+      mpu6050buf[5] = x_data%10+0x30;
+      mpu6050buf[6] = '\n'
+      mpu6050buf[7]  = y_data/10000+0x30;
+      mpu6050buf[8]  = y_data/1000%10+0x30;
+      mpu6050buf[9]  = y_data/100%10+0x30;
+      mpu6050buf[10] = y_data/10%10+0x30;
+      mpu6050buf[11] = y_data%10+0x30;
+      mpu6050buf[13] = z_data/10000+0x30;
+      mpu6050buf[14] = z_data/1000%10+0x30;
+      mpu6050buf[15] = z_data/100%10+0x30;
+      mpu6050buf[16] = z_data/10%10+0x30;
+      mpu6050buf[17] = z_data%10+0x30;
+      */
+
      //% weight=90
     //% blockId=queryVoltage block="Query voltage(mv)"
     export function queryVoltage() : void {
