@@ -109,7 +109,7 @@ namespace Rover {
         serial.writeString(cmd4);
         basic.pause(3000)
     }
-
+    
     //% weight=90
     //% blockId=switchAIMode block="Switch car mode to |%mode"
     //% mode.fieldEditor="gridpicker" mode.fieldOptions.columns=2
