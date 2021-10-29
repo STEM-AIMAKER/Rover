@@ -334,6 +334,26 @@ namespace Rover {
         return line4Value
     }    
     
+    //% weight=80
+    //% blockId=changeLineSensorThreshold block="Change line sensor threshold=%threshold"
+    //% threshold.defl=1600
+    export function changeLineSensorThreshold(threshold: number): void {
+        let cm = "CTCKIR="
+        if( threshold < 0)
+            threshold = 0
+        if( threshold > 10000)
+            threshold = 9999
+            
+        if( threshold < 10)
+            cm += "000"+threshold
+        else if( threshold < 100 )
+            cm += "00"+threshold
+        else if( threshold < 1000 )
+            cm += "0"+threshold    
+        else if( threshold < 10000)
+            cm += threshold
+    }
+    
     serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
         serialReadLine = serial.readLine();
         //basic.showString(serialReadLine)
